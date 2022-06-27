@@ -79,4 +79,5 @@ describe '#Chess' do
       expect(game.instance_variable_get('@turn')).to eql(1)
     end
   end
+  
 end

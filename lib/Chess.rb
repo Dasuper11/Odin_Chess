@@ -100,8 +100,10 @@ class Chess
   end
 
   def bishop_moves(start)
-   moves = []
-
+    [] + scan_direction(start, -1, -1) +
+      scan_direction(start, -1, 1) +
+      scan_direction(start, 1, -1) +
+      scan_direction(start, 1, 1)
   end
 
   def knight_moves(start)
@@ -119,11 +121,14 @@ class Chess
   end
 
   def rook_moves(start)
-
+    [] + scan_direction(start, -1, 0) +
+      scan_direction(start, 1, 0) +
+      scan_direction(start, 0, -1) +
+      scan_direction(start, 0, 1)
   end
 
   def queen_moves(start)
-
+    [] + rook_moves(start) + bishop_moves(start)
   end
 
   def king_moves(start)
@@ -134,7 +139,7 @@ class Chess
     moves = []
     scan = [start[0]+row_d, start[1]+col_d]
     while piece_in_way?(scan) == false
-      moves.append(scan)
+      moves.append(scan) if piece_in_way?(scan) == false
       scan = [scan[0]+row_d, scan[1]+col_d]
     end
     moves.append(scan) if enemey?(scan)
